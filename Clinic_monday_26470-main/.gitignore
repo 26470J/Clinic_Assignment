@@ -1,0 +1,20 @@
+HELP.md
+
+### Build output ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### IDE ###
+.idea/
+*.iml
+.vscode/
+*.iws
+*.ipr
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Logs ###
+*.log
+hs_err_pid*.log

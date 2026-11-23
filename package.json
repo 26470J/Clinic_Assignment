@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "frontend": "cd clinic_management/clinic-frontend && npm run dev",
+    "backend": "cd Clinic_monday_26470-main && mvnw.cmd spring-boot:run"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7"
+  }
+}

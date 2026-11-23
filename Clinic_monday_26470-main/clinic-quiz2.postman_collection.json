@@ -1,0 +1,866 @@
+{
+  "info": {
+    "_postman_id": "ce490910-0501-4d72-b4ab-3635d9eb2562",
+    "name": "CLINIC QUIZ 2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54454691",
+    "_collection_link": "https://go.postman.co/collection/54454691-ce490910-0501-4d72-b4ab-3635d9eb2562?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "A1-fail (duplicate)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A1 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"A1 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Specialization added to the doctor\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/{{specId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId}}",
+            "specializations",
+            "{{specId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1-fail (unknown doctor)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A1 unknown doctor returns 404\", () => pm.response.to.have.status(404));\r\npm.test(\"A1 unknown doctor message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"The doctor with that id does not exist\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/00000000-0000-0000-0000-000000000000/specializations/{{specId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "00000000-0000-0000-0000-000000000000",
+            "specializations",
+            "{{specId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1-fail (unknown specialization",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A1 unknown spec returns 404\", () => pm.response.to.have.status(404));\r\npm.test(\"A1 unknown spec message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"That specialization does not exist\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/00000000-0000-0000-0000-000000000000",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId}}",
+            "specializations",
+            "00000000-0000-0000-0000-000000000000"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A2 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"A2 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Specialization removed from the doctor\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/{{specId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId}}",
+            "specializations",
+            "{{specId}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "A2",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/{{specId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "{{doctorId}}",
+                "specializations",
+                "{{specId}}"
+              ]
+            }
+          },
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "44"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 12 Oct 2026 19:48:38 GMT"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "The doctor does not have that specialization"
+        }
+      ]
+    },
+    {
+      "name": "A2-fail",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A2 not-linked returns 409\", () => pm.response.to.have.status(409));\r\npm.test(\"A2 not-linked message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"The doctor does not have that specialization\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/{{specId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId}}",
+            "specializations",
+            "{{specId}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "A2-fail",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/doctors/{{doctorId}}/specializations/{{specId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "{{doctorId}}",
+                "specializations",
+                "{{specId}}"
+              ]
+            }
+          },
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "44"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 12 Oct 2026 19:48:30 GMT"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "The doctor does not have that specialization"
+        }
+      ]
+    },
+    {
+      "name": "A3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A3 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"A3 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"A3 sorted by officeNumber\", () => {\r\n    const nums = pm.response.json().map(o => o.officeNumber);\r\n    pm.expect(nums).to.eql([...nums].sort((a, b) => a - b));\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/offices/free",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "offices",
+            "free"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "A3",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/offices/free",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "free"
+              ]
+            }
+          },
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 12 Oct 2026 19:48:00 GMT"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": \"946da44c-d1b1-4247-a3b8-474945f26e5e\",\n    \"name\": \"Orthopedics\",\n    \"officeNumber\": 104\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "A4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"A4 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"A4 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Office changed successfully\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId3}}/office?officeNumber=104",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId3}}",
+            "office"
+          ],
+          "query": [
+            {
+              "key": "officeNumber",
+              "value": "104"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"appointmentDate\": \"2026-12-20\", \"reason\": \"Test visit\", \"status\": \"COMPLETED\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/appointments/save?patientFirstName=Ogechi&patientLastName=Anosike&doctorFirstName=Ambrose&doctorLastName=Uwalaka",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "appointments",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "patientFirstName",
+              "value": "Ogechi"
+            },
+            {
+              "key": "patientLastName",
+              "value": "Anosike"
+            },
+            {
+              "key": "doctorFirstName",
+              "value": "Ambrose"
+            },
+            {
+              "key": "doctorLastName",
+              "value": "Uwalaka"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"B2 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"B2 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Appointment status updated successfully\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/appointments/{{scheduledApptId}}/status?status=CONFIRMED",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "appointments",
+            "{{scheduledApptId}}",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CONFIRMED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"B3 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"B3 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Appointment rescheduled successfully\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/appointments/abcb7074-8cfc-4aa4-8a2d-a63d7a296bc4/reschedule?newDate=2026-12-05",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "appointments",
+            "abcb7074-8cfc-4aa4-8a2d-a63d7a296bc4",
+            "reschedule"
+          ],
+          "query": [
+            {
+              "key": "newDate",
+              "value": "2026-12-05"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"C1 returns 201\", () => pm.response.to.have.status(201));\r\npm.test(\"C1 message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Prescription saved successfully\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"medicineName\": \"mexodil\", \"dosage\": \"1 tablet, 3 times a day\", \"durationDays\": 3 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/prescriptions/save?appointmentId={{completedApptId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "prescriptions",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "appointmentId",
+              "value": "{{completedApptId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"C2 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"C2 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"C2 has prescriptions\", () =>\r\n    pm.expect(pm.response.json().length).to.be.above(0));\r\npm.test(\"C2 each has appointment populated\", () =>\r\n    pm.response.json().forEach(p => pm.expect(p.appointment).to.be.an(\"object\")));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/prescriptions/appointment/{{completedApptId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "prescriptions",
+            "appointment",
+            "{{completedApptId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"C3 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"C3 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"C3 newest first\", () => {\r\n    const dates = pm.response.json().map(p => p.issuedDate);\r\n    pm.expect(dates).to.eql([...dates].sort().reverse());\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/prescriptions/patient/{{ssNumber}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "prescriptions",
+            "patient",
+            "{{ssNumber}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"C4 update returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"C4 update message\", () =>\r\n    pm.expect(pm.response.text()).to.eql(\"Prescription updated successfully\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"medicineName\": \"Ibuprofen\", \"dosage\": \"2 tablets, twice a day\", \"durationDays\": 5 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/prescriptions/update/{{prescId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "prescriptions",
+            "update",
+            "{{prescId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"D1 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"D1 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"D1 has no CANCELLED\", () =>\r\n    pm.response.json().forEach(a => pm.expect(a.status).to.not.eql(\"CANCELLED\")));\r\npm.test(\"D1 all on 2026-10-20\", () =>\r\n    pm.response.json().forEach(a => pm.expect(a.appointmentDate).to.eql(\"2026-10-20\")));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/{{doctorId}}/agenda?date=2026-10-20",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "{{doctorId}}",
+            "agenda"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "2026-10-20"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"D2 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"D2 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"D2 statuses are SCHEDULED or CONFIRMED\", () =>\r\n    pm.response.json().forEach(a => pm.expect([\"SCHEDULED\", \"CONFIRMED\"]).to.include(a.status)));\r\npm.test(\"D2 sorted ascending\", () => {\r\n    const dates = pm.response.json().map(a => a.appointmentDate);\r\n    pm.expect(dates).to.eql([...dates].sort());\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/patients/{{ssNumber}}/upcoming",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "patients",
+            "{{ssNumber}}",
+            "upcoming"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"D3 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"D3 returns array\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));\r\npm.test(\"D3 matched name contains query (case-insensitive)\", () =>\r\n    pm.response.json().forEach(d => {\r\n        const q = \"uwalaka\";\r\n        pm.expect(\r\n            d.firstName.toLowerCase().includes(q) || d.lastName.toLowerCase().includes(q)\r\n        ).to.be.true;\r\n    }));\r\npm.test(\"D3 sorted by lastName\", () => {\r\n    const names = pm.response.json().map(d => d.lastName);\r\n    pm.expect(names).to.eql([...names].sort());\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/search?name=uwalaka",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "uwalaka"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"D4 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"D4 has exactly these keys in order\", () =>\r\n    pm.expect(Object.keys(pm.response.json())).to.eql(\r\n        [\"patients\", \"doctors\", \"freeOffices\", \"appointmentsToday\", \"scheduled\", \"prescriptions\"]\r\n    ));\r\npm.test(\"D4 all values are numbers\", () =>\r\n    Object.values(pm.response.json()).forEach(v => pm.expect(v).to.be.a(\"number\")));\r\npm.test(\"D4 patients = 9\", () => pm.expect(pm.response.json().patients).to.eql(9));\r\npm.test(\"D4 doctors = 3\", () => pm.expect(pm.response.json().doctors).to.eql(3));\r\npm.test(\"D4 scheduled = 4\", () => pm.expect(pm.response.json().scheduled).to.eql(4));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/dashboard/summary",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "summary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Bonus1 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Bonus1 array of [name,count]\", () =>\r\n    pm.response.json().forEach(r => {\r\n        pm.expect(r).to.be.an(\"array\");\r\n        pm.expect(r.length).to.eql(2);\r\n        pm.expect(r[0]).to.be.a(\"string\");\r\n        pm.expect(r[1]).to.be.a(\"number\");\r\n    }));\r\npm.test(\"Bonus1 sorted most first\", () => {\r\n    const counts = pm.response.json().map(r => r[1]);\r\n    pm.expect(counts).to.eql([...counts].sort((a, b) => b - a));\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/prescriptions/stats/top-medicines",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "prescriptions",
+            "stats",
+            "top-medicines"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Bonus2 returns 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Bonus2 rows are [first,last,count]\", () =>\r\n    pm.response.json().forEach(r => {\r\n        pm.expect(r).to.be.an(\"array\");\r\n        pm.expect(r.length).to.eql(3);\r\n        pm.expect(r[0]).to.be.a(\"string\");\r\n        pm.expect(r[1]).to.be.a(\"string\");\r\n        pm.expect(r[2]).to.be.a(\"number\");\r\n    }));\r\npm.test(\"Bonus2 sorted busiest first\", () => {\r\n    const counts = pm.response.json().map(r => r[2]);\r\n    pm.expect(counts).to.eql([...counts].sort((a, b) => b - a));\r\n});\r\npm.test(\"Bonus2 no zero-count doctors\", () =>\r\n    pm.response.json().forEach(r => pm.expect(r[2]).to.be.above(0)));\r\npm.test(\"Bonus2 contains Chinyere with 2\", () =>\r\n    pm.expect(pm.response.json()).to.deep.include([\"Chinyere\", \"Uwalaka\", 2]));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/doctors/workload?start=2026-10-01&end=2026-12-31",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "doctors",
+            "workload"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01"
+            },
+            {
+              "key": "end",
+              "value": "2026-12-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
